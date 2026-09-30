@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>GreatCow — заказ еды</title>
+<link rel="icon" href="/logo512.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/styles.css" />
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <img class="brand-logo" src="/logo512.png" alt="GreatCow" />
+    <div class="brand-text">
+      <h1>GreatCow</h1>
+      <p>🐮🌭 уличная еда</p>
+    </div>
+  </div>
+  <button class="cart-btn" id="cartBtn" aria-label="Корзина">
+    🛒
+    <span class="cart-badge" id="cartBadge" hidden>0</span>
+  </button>
+</header>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main id="menuView" class="menu-view">
+  <div class="menu-list" id="menuList"></div>
+</main>
+
+<div class="cart-bar" id="cartBar" hidden>
+  <button class="cart-bar-btn" id="cartBarBtn">
+    <span id="cartBarCount">0 товаров</span>
+    <span id="cartBarTotal">0 ₽</span>
+  </button>
+</div>
+
+<!-- Модалка корзины / чекаута -->
+<div class="sheet-overlay" id="checkoutOverlay" hidden>
+  <div class="sheet">
+    <div class="sheet-header">
+      <button class="sheet-back" id="checkoutBack" aria-label="Назад">←</button>
+      <h2>Ваш заказ</h2>
+      <button class="sheet-close" id="checkoutClose" aria-label="Закрыть">✕</button>
+    </div>
+
+    <div class="sheet-body">
+      <div id="cartItems" class="cart-items"></div>
+
+      <div class="cart-total-row">
+        <span>Итого</span>
+        <strong id="cartTotal">0 ₽</strong>
+      </div>
+
+      <form id="checkoutForm" class="checkout-form">
+        <label>
+          Имя
+          <input type="text" name="customerName" required placeholder="Как к вам обращаться" />
+        </label>
+        <label>
+          Телефон
+          <input type="tel" name="phone" required placeholder="+7 900 000-00-00" />
+        </label>
+
+        <div class="fulfillment-toggle">
+          <button type="button" class="fulfillment-opt active" data-value="pickup">Самовывоз</button>
+          <button type="button" class="fulfillment-opt" data-value="delivery">Доставка</button>
+        </div>
+
+        <label id="addressField" hidden>
+          Адрес доставки
+          <input type="text" name="address" placeholder="Улица, дом, квартира" />
+        </label>
+
+        <label>
+          Комментарий
+          <textarea name="comment" rows="2" placeholder="Например: без лука"></textarea>
+        </label>
+
+        <button type="submit" class="submit-btn" id="submitBtn">Оформить заказ</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Экран успеха -->
+<div class="sheet-overlay" id="successOverlay" hidden>
+  <div class="sheet success-sheet">
+    <div class="success-icon">🐮</div>
+    <h2>Заказ принят!</h2>
+    <p id="successText">Мы свяжемся с вами для подтверждения.</p>
+    <button class="submit-btn" id="successCloseBtn">Готово</button>
+  </div>
+</div>
+
+<template id="itemCardTemplate">
+  <article class="item-card">
+    <div class="item-info">
+      <h3 class="item-name"></h3>
+      <p class="item-desc"></p>
+      <span class="item-price"></span>
+    </div>
+    <div class="item-qty">
+      <button class="qty-btn qty-minus" aria-label="Убрать">−</button>
+      <span class="qty-value">0</span>
+      <button class="qty-btn qty-plus" aria-label="Добавить">+</button>
+    </div>
+  </article>
+</template>
+
+<script src="/app.js"></script>
+</body>
+</html>

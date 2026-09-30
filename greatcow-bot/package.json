@@ -1,0 +1,19 @@
+{
+  "name": "greatcow-bot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GreatCow — Telegram Mini App для заказа уличной еды (портфолио-проект)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "setup-profile": "node setup-bot-profile.js"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "node-telegram-bot-api": "^0.66.0"
+  }
+}
